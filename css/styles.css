@@ -299,28 +299,32 @@ address { font-style: normal; }
 /* =========================================================
    2. HERO
    ========================================================= */
-.hero { padding-top: clamp(1rem, 0.5rem + 1.5vw, 2rem); background: var(--white); }
+/* Immagine a tutta larghezza e tutta altezza della sezione */
+.hero { background: var(--white); }
 .hero-frame {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: clamp(560px, 78vh, 760px);
+  width: 100%;
+  min-height: max(600px, calc(100vh - var(--header-h)));
+  min-height: max(600px, calc(100svh - var(--header-h)));
   overflow: hidden;
-  border-radius: var(--radius);
   isolation: isolate;
 }
 .hero-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: 50% 30%;
+  object-position: 55% 35%;
   z-index: -2;
-  filter: saturate(.7) sepia(.12);
+  filter: saturate(.85) sepia(.06);
 }
 .hero-overlay {
   position: absolute; inset: 0;
   z-index: -1;
-  background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(255,255,255,.9) 0%, rgba(255,255,255,.8) 55%, rgba(255,255,255,.58) 100%);
+  background:
+    radial-gradient(ellipse 48% 58% at 50% 52%, rgba(255,255,255,.9) 0%, rgba(255,255,255,.78) 55%, rgba(255,255,255,.45) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,0) 30%, rgba(255,255,255,0) 75%, rgba(255,255,255,.3));
 }
 .hero-content {
   text-align: center;
@@ -355,7 +359,7 @@ address { font-style: normal; }
 .about-text { grid-area: text; }
 .about-circle {
   position: relative;
-  width: min(100%, 440px);
+  width: min(100%, 300px);
   aspect-ratio: 1;
   margin-inline: auto;
   border-radius: 50%;
@@ -394,116 +398,59 @@ address { font-style: normal; }
 .audience-card p { color: var(--text-soft); font-size: .95em; }
 
 /* =========================================================
-   5. IL NOSTRO APPROCCIO — racconto a scorrimento (niente box, niente numeri)
+   5. IL NOSTRO APPROCCIO — indice editoriale (niente box, niente numeri)
    ========================================================= */
-.philo {
+.principles { max-width: 1080px; margin-inline: auto; }
+.principle {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-  gap: clamp(2.5rem, 6vw, 7rem);
-  max-width: 1180px;
-  margin-inline: auto;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+  padding-block: clamp(1.8rem, 1.4rem + 1.4vw, 2.6rem);
 }
-.philo-stage {
-  position: sticky;
-  top: calc(var(--header-h) + 8vh);
-  align-self: start;
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-block: 2rem;
-}
-/* filetto verticale oro che separa la "scena" dai principi */
-.philo-stage::after {
+/* filetto oro che si disegna da sinistra a destra all'ingresso */
+.principle::before, .principle:last-child::after {
   content: "";
-  position: absolute;
-  right: calc(clamp(2.5rem, 6vw, 7rem) / -2);
-  top: 10%; bottom: 10%;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
-  opacity: .6;
+  position: absolute; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), rgba(178,147,73,.25));
+  transform-origin: left center;
+  transition: transform 1.1s var(--ease) .1s;
 }
-.philo-kicker {
+.principle::before { top: 0; }
+.principle:last-child::after { bottom: 0; }
+.js .principle::before, .js .principle:last-child::after { transform: scaleX(0); }
+.js .principle.is-visible::before, .js .principle.is-visible:last-child::after { transform: scaleX(1); }
+
+.principle-word {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1.15rem, 1rem + .5vw, 1.45rem);
-  color: var(--espresso);
-  margin: 0 0 1rem;
-}
-.philo-words { position: relative; display: grid; }
-.pw {
-  grid-area: 1 / 1;
-  font-family: var(--serif);
   font-weight: 500;
-  font-style: italic;
-  font-size: clamp(3rem, 1.4rem + 4.6vw, 6.4rem);
-  line-height: 1.05;
-  letter-spacing: -.01em;
+  font-size: clamp(2rem, 1.5rem + 1.9vw, 3.2rem);
+  line-height: 1.1;
   color: var(--espresso);
-  overflow-wrap: anywhere;
-  /* effetto sipario: la parola si svela dal basso verso l'alto */
-  clip-path: inset(100% 0 0 0);
-  transform: translateY(22px);
-  opacity: 0;
-  transition: clip-path .7s var(--ease), transform .7s var(--ease), opacity .5s var(--ease);
+  transition: transform .5s var(--ease);
 }
-.pw.is-current { clip-path: inset(-10% -5% -20% -5%); transform: none; opacity: 1; }
-.pw::first-letter { color: var(--gold); }   /* capolettera in oro, testo grande */
-
-.philo-pearls {
-  position: relative;
-  display: flex;
-  gap: 2.1rem;
-  margin-top: 2.25rem;
-}
-.philo-pearls::before {      /* il filo che unisce le perle */
+/* bullet a perla */
+.principle-word::before {
   content: "";
-  position: absolute; left: 5px; right: 5px; top: 50%;
-  height: 1px; background: var(--line);
-}
-.philo-pearls span {
-  position: relative;
-  width: 11px; height: 11px;
-  border-radius: 50%;
-  border: 1px solid var(--gold);
-  background: var(--white);
-  transition: background-color .45s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease);
-}
-.philo-pearls span.is-current { background: var(--gold); transform: scale(1.25); box-shadow: 0 0 0 5px rgba(178,147,73,.16); }
-
-.philo-list { padding-block: 10vh; }
-.pp {
-  position: relative;
-  padding: 0 0 0 2.4rem;
-  min-height: 34vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-/* bullet a perla con alone */
-.pp::before {
-  content: "";
-  position: absolute;
-  left: 0; top: calc(50% - 3.3rem);
-  width: 13px; height: 13px;
+  flex: none;
+  width: 14px; height: 14px;
   border-radius: 50%;
   border: 1px solid var(--gold);
   background: radial-gradient(circle, var(--gold) 0 2.5px, transparent 3px);
   transition: background-color .45s var(--ease), box-shadow .45s var(--ease);
 }
-.pp h3 {
-  font-family: var(--sans);
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  line-height: 1.6;
-  margin-bottom: .8rem;
+.principle p { margin: 0; color: var(--text-soft); max-width: 520px; }
+
+@media (hover: hover) {
+  .principle:hover .principle-word { transform: translateX(10px); }
+  .principle:hover .principle-word::before { background-color: var(--gold); box-shadow: 0 0 0 6px rgba(178,147,73,.15); }
 }
-.pp p { color: var(--text-soft); margin: 0; max-width: 430px; }
-.js .pp { opacity: .35; transition: opacity .5s var(--ease); }
-.js .pp.is-current { opacity: 1; }
-.js .pp.is-current::before { background-color: rgba(178,147,73,.25); box-shadow: 0 0 0 6px rgba(178,147,73,.12); }
 
 /* =========================================================
    6. I SERVIZI — 4 box identiche
@@ -868,31 +815,16 @@ address { font-style: normal; }
 
 @media (max-width: 959px) {
   .about-grid { grid-template-columns: 1fr; grid-template-areas: "visual" "head" "text"; }
-  .about-visual { position: static; width: 100%; max-width: 380px; margin: 0 auto clamp(2.5rem, 6vw, 3.5rem); }
-  .about-circle { width: min(100%, 380px); }
+  .about-visual { position: static; width: 100%; max-width: 240px; margin: 0 auto clamp(2rem, 5vw, 3rem); }
+  .about-circle { width: min(100%, 220px); }
+  .about-caption { margin-top: 1.4rem; font-size: 1.2rem; }
   .about-text { max-width: 680px; margin-inline: auto; }
 
   .audience-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
 
-  /* Approccio su mobile: ogni principio ha la sua grande parola editoriale */
-  .philo { grid-template-columns: 1fr; max-width: 560px; gap: 0; }
-  .philo-stage { display: none; }
-  .philo-list { padding-block: 0; border-left: 1px solid var(--line); margin-left: 6px; }
-  .pp { min-height: 0; padding: 0 0 2.75rem 2rem; }
-  .pp:last-child { padding-bottom: 0; }
-  .pp::before { left: -7px; top: .85rem; background-color: var(--white); }
-  .pp h3 {
-    font-family: var(--serif);
-    font-size: clamp(2.1rem, 1.6rem + 2.4vw, 2.8rem);
-    font-style: italic;
-    font-weight: 500;
-    letter-spacing: 0;
-    text-transform: none;
-    line-height: 1.1;
-    margin-bottom: .7rem;
-  }
-  .pp h3::first-letter { color: var(--gold); }
-  .js .pp { opacity: .45; }
+  /* Approccio su mobile: parola sopra, testo sotto */
+  .principle { grid-template-columns: 1fr; gap: .8rem; }
+  .principle p { padding-left: calc(14px + 1.25rem); }
 
   /* Percorso verticale */
   .journey-steps { grid-template-columns: 1fr; gap: 0; max-width: 560px; margin-inline: auto; }
@@ -913,8 +845,7 @@ address { font-style: normal; }
 
 @media (max-width: 599px) {
   .services-grid { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; }
-  .hero-frame { min-height: 0; }
-  .hero-img { object-position: 45% 30%; }
+  .hero-img { object-position: 52% 35%; }
   .hero-content { padding-inline: 1.1rem; }
   .eyebrow { letter-spacing: .16em; gap: .6rem; font-size: .68rem; }
   .eyebrow::before, .eyebrow::after { width: 18px; }

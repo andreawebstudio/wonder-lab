@@ -22,10 +22,10 @@
 
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" as="image"
-        imagesrcset="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=800&q=70 800w,
-                     https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=1400&q=70 1400w,
-                     https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=2000&q=70 2000w"
-        imagesizes="(min-width: 1280px) 1240px, 100vw">
+        imagesrcset="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=70 800w,
+                     https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1400&q=70 1400w,
+                     https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=2400&q=70 2400w"
+        imagesizes="100vw">
 
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.add('js');</script>
@@ -109,15 +109,14 @@
 
     <!-- ============ 2. HERO ============ -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="container">
         <div class="hero-frame">
-          <!-- Immagine illustrativa temporanea: sostituire con una fotografia autentica di Wonder Lab -->
+          <!-- Immagine illustrativa temporanea a tutta sezione: sostituire con una fotografia autentica di Wonder Lab -->
           <img class="hero-img"
-               src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=1400&q=70"
-               srcset="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=800&q=70 800w,
-                       https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=1400&q=70 1400w,
-                       https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=2000&q=70 2000w"
-               sizes="(min-width: 1280px) 1240px, 100vw"
+               src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1400&q=70"
+               srcset="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=70 800w,
+                       https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1400&q=70 1400w,
+                       https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=2400&q=70 2400w"
+               sizes="100vw"
                alt="" width="2000" height="1333" fetchpriority="high" decoding="async">
           <div class="hero-overlay" aria-hidden="true"></div>
 
@@ -132,7 +131,6 @@
             <p class="hero-note"><span class="hairline" aria-hidden="true"></span>Bellezza, benessere e attenzione a te.<span class="hairline" aria-hidden="true"></span></p>
           </div>
         </div>
-      </div>
     </section>
 
     <!-- ============ 3. CHI SIAMO — sfondo bianco ============ -->
@@ -220,41 +218,27 @@
         </header>
 
         <!--
-          Racconto a scorrimento: a sinistra una grande parola editoriale (fissa durante lo scroll)
-          che cambia con un effetto "sipario"; a destra i 4 principi con bullet a perla.
-          Su mobile la parola grande diventa il titolo di ciascun principio.
+          Indice editoriale: 4 principi come righe di una rivista, separati da filetti oro
+          che si disegnano all'ingresso. Al passaggio del mouse la perla si accende e la parola scorre.
         -->
-        <div class="philo" id="philo">
-          <div class="philo-stage" aria-hidden="true">
-            <p class="philo-kicker">Il nostro modo di prenderci cura</p>
-            <div class="philo-words">
-              <span class="pw is-current">Ascolto</span>
-              <span class="pw">Personalizzazione</span>
-              <span class="pw">Competenza</span>
-              <span class="pw">Accoglienza</span>
-            </div>
-            <div class="philo-pearls"><span class="is-current"></span><span></span><span></span><span></span></div>
-          </div>
-
-          <ul class="philo-list" role="list">
-            <li class="pp is-current">
-              <h3>Ascolto</h3>
-              <p>Dedichiamo attenzione alle esigenze, alle preferenze e alle aspettative di ogni cliente, perché un buon trattamento comincia dalla comprensione della persona.</p>
-            </li>
-            <li class="pp">
-              <h3>Personalizzazione</h3>
-              <p>Non crediamo in soluzioni identiche per tutte. Valutiamo insieme il percorso estetico più adatto, rispettando le caratteristiche individuali.</p>
-            </li>
-            <li class="pp">
-              <h3>Competenza</h3>
-              <p>Esperienza professionale, aggiornamento e cura dei dettagli: dalla scelta del trattamento all'esperienza in salone, ogni particolare conta.</p>
-            </li>
-            <li class="pp">
-              <h3>Accoglienza</h3>
-              <p>Uno spazio in cui sentirsi a proprio agio, ascoltate e valorizzate, concedendosi tempo e una pausa dalla quotidianità.</p>
-            </li>
-          </ul>
-        </div>
+        <ul class="principles" role="list">
+          <li class="principle reveal">
+            <h3 class="principle-word">Ascolto</h3>
+            <p>Dedichiamo attenzione alle esigenze, alle preferenze e alle aspettative di ogni cliente, perché un buon trattamento comincia dalla comprensione della persona.</p>
+          </li>
+          <li class="principle reveal">
+            <h3 class="principle-word">Personalizzazione</h3>
+            <p>Non crediamo in soluzioni identiche per tutte. Valutiamo insieme il percorso estetico più adatto, rispettando le caratteristiche individuali.</p>
+          </li>
+          <li class="principle reveal">
+            <h3 class="principle-word">Competenza</h3>
+            <p>Esperienza professionale, aggiornamento e cura dei dettagli: dalla scelta del trattamento all'esperienza in salone, ogni particolare conta.</p>
+          </li>
+          <li class="principle reveal">
+            <h3 class="principle-word">Accoglienza</h3>
+            <p>Uno spazio in cui sentirsi a proprio agio, ascoltate e valorizzate, concedendosi tempo e una pausa dalla quotidianità.</p>
+          </li>
+        </ul>
       </div>
     </section>
 

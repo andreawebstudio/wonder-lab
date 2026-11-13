@@ -108,25 +108,6 @@
     });
   });
 
-  /* ---------- Approccio: la parola grande segue il principio al centro dello schermo ---------- */
-  var philo = document.getElementById('philo');
-  if (philo && 'IntersectionObserver' in window) {
-    var points = Array.prototype.slice.call(philo.querySelectorAll('.pp'));
-    var words = philo.querySelectorAll('.pw');
-    var pearls = philo.querySelectorAll('.philo-pearls span');
-    var setCurrent = function (idx) {
-      [points, words, pearls].forEach(function (list) {
-        Array.prototype.forEach.call(list, function (el, i) { el.classList.toggle('is-current', i === idx); });
-      });
-    };
-    var philoObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) setCurrent(points.indexOf(entry.target));
-      });
-    }, { rootMargin: '-45% 0px -45% 0px' });
-    points.forEach(function (p) { philoObserver.observe(p); });
-  }
-
   /* ---------- Come funziona: percorso che si disegna con lo scroll ---------- */
   var journey = document.getElementById('journey');
   if (journey) {
